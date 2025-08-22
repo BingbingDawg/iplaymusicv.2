@@ -1,4 +1,4 @@
-import Footer from "../components/footer";
+import Navigation from "../components/navigation";
 import SiteHeader from "../components/site-header";
 
 
@@ -12,8 +12,9 @@ export default function RootLayout({ children }) {
 
         {children}
         
-        <Footer />
         </main>
+        
+        <Navigation />
    </>
   );
 }
