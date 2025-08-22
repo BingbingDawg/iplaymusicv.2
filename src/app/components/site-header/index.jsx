@@ -4,28 +4,44 @@ import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowBack, IoIosSearch } from "react-icons/io";
 import {useEffect, useState } from "react";
 import { set } from "zod";
+import Heading from "../heading";
 
 export default function SiteHeader({
  
+  albumData,
   returnToPage = true,
+  className = "",
   }) {
   const router = useRouter();
   const pathname = usePathname();
   const [showSearch, setShowSearch] = useState(false);
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState("");
   const [gradientTitle, setGradientTitle] = useState(false);
 
   useEffect(function() {
-    switch(pathname) {
-      case "/":
+    switch(true) {
+      case pathname === "/":
         setShowSearch(true);
         setTitle("Featured")
         setGradientTitle("Featured");
         break;
-      case "/categories":
+      case pathname === "/categories":
         setShowSearch(true);
         setTitle("Categories")
         setGradientTitle("Categories");
+        break;
+      case pathname === "/playlists":
+        setShowSearch(true);
+        setTitle("Playlists")
+        setGradientTitle("playlists");
+        break;
+      case /^\/album\/[A-Za-z0-9_-]+$/.test(pathname):
+        setShowSearch(false);
+        setTitle(albumData?.album_type || "Album Details");
+        break;
+      case /^\/music-player\/[A-Za-z0-9_-]+$/.test(pathname):
+        setShowSearch(false);
+        setTitle("playing");
         break;
       
     }
@@ -33,7 +49,7 @@ export default function SiteHeader({
    
   return (
     <>
-    <header className="headerMenu">
+    <header className={"headerMenu " + className}>
       {returnToPage && (
         <button  type="button" onClick={() => router.back()}>
         <IoIosArrowBack
@@ -42,18 +58,20 @@ export default function SiteHeader({
         </button>
       )}
       {title && (
-        <p className="col-2 text-lg uppercase font-light text-[15px]">
+        <p className="
+        
+        text-lg uppercase font-light text-[15px]">
           {title}
         </p>
       )}
-      {showSearch && (
+      {showSearch ? (
         <IoIosSearch className="col-3 justify-self-end text-[18px] w-auto" />
-      )}
+      ) : (<div></div>)}
     </header>
   {gradientTitle && (
-     <p className="col-2 font-bold text-4xl text-gradient mt-[44px] mb-[37px]">
+     <Heading level={2} className={`col-2 font-bold text-4xl ${pathname==="/playlists" ? "text-white capitalize m-[25px]" : "text-gradient"} mt-[44px] mb-[37px]`}>
        {gradientTitle}
-     </p>
+     </Heading>
    )}
    </>
   );

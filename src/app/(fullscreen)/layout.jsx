@@ -1,4 +1,4 @@
-import Footer from "../components/footer";
+import Navigation from "../components/navigation";
 import SiteHeader from "../components/site-header";
 import "../globals.css";
 
@@ -12,7 +12,7 @@ export default function FullscreenLayout({ children }) {
 
         </SiteHeader>
         {children}
-        <Footer></Footer>
+        <Navigation></Navigation>
       </body>
     </html>
   );

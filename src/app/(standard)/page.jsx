@@ -1,14 +1,11 @@
 import { cookies } from "next/headers";
-import Image from "next/image";
-import Link from "next/link";
-
-
+import FeaturedCard from "../components/featured-card";
 
 export const metadata = {
   title: "Featured"
 };
 
-export default async function Featured({ item }) {
+export default async function Featured() {
   const cookieStore = await cookies();
 
   const access_token = cookieStore.get ("iplaymusic_access_token")
@@ -25,10 +22,10 @@ export default async function Featured({ item }) {
   return (
     <ul className="albums">
         {data?.albums?.items?.map
-        (item => 
-          <li className="items" key={item.id}>
-          
-        </li>
+        (item => (
+          <li key={item.id}>
+          <FeaturedCard item={item} />
+        </li>)
       )}
         
       </ul>
