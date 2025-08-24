@@ -49,7 +49,7 @@ export default async function AlbumsDetailPage({ params }) {
                 <article>
                     <SiteHeader className="fixed w-full text-white" albumData={albumData} />
                     <div className="grid grid-rows-2">
-                        <Image className="row-start-1 row-end-3 col-start-1 col-end-2" src={albumData?.images[0].url} alt="" height={albumData.images[0].width} width={albumData.images[0].height} priority />
+                        <Image className="row-start-1 row-end-3 col-start-1 col-end-2" src={albumData?.images[0].url} alt="" height={albumData.images[0].height} width={albumData.images[0].width} priority />
                         <div className=" row-start-1 row-end-2 col-start-1 col-end-2 flex flex-col place-content-end ml-5">
                             <Heading level={1} className=" text-white text-[36px] mb-3 ">{albumData?.name}</Heading>
                             <p className="text-white font-bold text-[12px]">{albumData?.total_tracks} Songs</p>
