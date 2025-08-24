@@ -12,23 +12,22 @@ export default async function PlayLists() {
 
     const access_token = cookieStore.get("iplaymusic_access_token")
 
-    const playlistResponse = await fetch("https://api.spotify.com/v1/playlists", {
+    const playlistResponse = await fetch(`https://api.spotify.com/v1/me/playlists/`, {
         headers: {
             "Authorization": `Bearer ${access_token.value}`
         }
 
     })
-    console.log(playlistResponse)
-    /* const playlistdata = await playlistResponse.json();
+    const playlistdata = await playlistResponse.json();
     console.log("playlistdata", playlistdata);
- */
+
 
     return(
         <>
             <SiteHeader />
             <main>
                 <div className="soundwave-bg">
-                    <PlaylistCarousel />
+                    <PlaylistCarousel playlistdata={playlistdata}/>
                 </div>
                 <Navigation />
             </main>
